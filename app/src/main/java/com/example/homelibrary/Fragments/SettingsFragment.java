@@ -17,8 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.homelibrary.Data.User;
-import com.example.homelibrary.Data.UserDB;
+import com.example.homelibrary.Data.AppDatabase;
 import com.example.homelibrary.R;
 
 public class SettingsFragment extends Fragment {
@@ -27,7 +26,7 @@ public class SettingsFragment extends Fragment {
     ImageView Image;
     Button Ex,Reg;
 
-    UserDB userDB;
+    AppDatabase appDatabase;
     EditText EdName,EdPass;
 
     @Override
@@ -57,8 +56,9 @@ public class SettingsFragment extends Fragment {
             }
         };
 
-        userDB = Room.databaseBuilder(getActivity().getApplicationContext(), UserDB.class,"UsersData")
+        appDatabase = Room.databaseBuilder(getActivity().getApplicationContext(), AppDatabase.class,"HomeLibraryDB")
                 .addCallback(myCallBack).build();
+
 
 
     }

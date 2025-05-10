@@ -8,25 +8,21 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.room.Room;
-import androidx.room.RoomDatabase;
-import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.homelibrary.Data.AppDatabase;
 import com.example.homelibrary.Data.User;
-import com.example.homelibrary.Data.UserDB;
 import com.example.homelibrary.R;
 
 public class EntryActivity extends AppCompatActivity {
 
-    Button btnLogin,btnRegister;
-    EditText editTextEmail,editTextPassword;
-    UserDB userDB;
-    
+    Button btnLogin, btnRegister;
+    EditText editTextEmail, editTextPassword;
+    AppDatabase appDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,42 +39,27 @@ public class EntryActivity extends AppCompatActivity {
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
 
-        RoomDatabase.Callback myCallBack = new RoomDatabase.Callback() {
-            @Override
-            public void onCreate(@NonNull SupportSQLiteDatabase db) {
-                super.onCreate(db);
-            }
-
-            @Override
-            public void onOpen(@NonNull SupportSQLiteDatabase db) {
-                super.onOpen(db);
-            }
-        };
-
-        userDB = Room.databaseBuilder(getApplicationContext(), UserDB.class,"UsersData")
-                .addCallback(myCallBack).allowMainThreadQueries().build();
+        // Получаем экземпляр БД
+        appDatabase = AppDatabase.getInstance(getApplicationContext());
 
         btnLogin.setOnClickListener(v -> {
             String email = editTextEmail.getText().toString();
             String password = editTextPassword.getText().toString();
-            if (userDB.getUserDAO().validate(email, password) != null) {//Успешный вход, пользователь с таким именем и паролем нашелся
-                    startActivity(new Intent(this, MainActivity.class));//Переход в основную активность
-                    finish();
-                } else {
-                    Toast.makeText(this, "Неверный email или пароль", Toast.LENGTH_SHORT).show();
-                }
-        });
-
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {//Регистрация пользователя с добавлением в БД
-                String email = editTextEmail.getText().toString();
-                String password = editTextPassword.getText().toString();
-                User newUser = new User(email,password);
-                userDB.getUserDAO().addUser(newUser);
-                Toast.makeText(EntryActivity.this, "Аккаунт успешно зарегестрирован", Toast.LENGTH_SHORT).show();
+            if (appDatabase.userDao().validate(email, password) != null) {
+                // Успешный вход, пользователь с такой почтой и паролем нашелся
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
+            } else {
+                Toast.makeText(this, "Неверный email или пароль", Toast.LENGTH_SHORT).show();
             }
         });
 
+        btnRegister.setOnClickListener(v -> {
+            String email = editTextEmail.getText().toString().trim();
+            String password = editTextPassword.getText().toString().trim();
+            User newUser = new User(email, password);
+            appDatabase.userDao().addUser(newUser);
+            Toast.makeText(EntryActivity.this, "Аккаунт успешно зарегистрирован", Toast.LENGTH_SHORT).show();
+        });
     }
 }

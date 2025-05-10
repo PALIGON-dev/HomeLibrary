@@ -36,7 +36,7 @@ public class LibFragment extends Fragment {
         Library = view.findViewById(R.id.LibList);
         Library.setLayoutManager(new GridLayoutManager(getContext(),3));
 
-        Book Test = new Book("Big Dildo","Me","Cool Book","03.05.2025",5.0,R.drawable.image_test);
+        Book Test = new Book("Big Dildo","ME","Cool Book","03.05.2025",5.0,"Sdfg");
         List<Book> books = Arrays.asList(Test,Test,Test,Test,Test,Test,Test,Test,Test,Test,Test,Test,Test);
         LibRecyclerAdapter adapter = new LibRecyclerAdapter(getContext(), books);
         Library.setAdapter(adapter);

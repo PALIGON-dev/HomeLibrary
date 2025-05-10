@@ -26,17 +26,17 @@ public class Book {
 
     private double averageRating;//Рейтинг
 
-    @ColumnInfo(name = "thumbnail_url")
-    private String thumbnailUrl; // ссылка на изображение обложки
+    @ColumnInfo(name = "cover_url")
+    private String сoverUrl; // ссылка на изображение обложки
 
     public Book(String title, String[] authors, String description, String publishedDate,
-                double averageRating, String thumbnailUrl, String[] ownerIds) {
+                double averageRating, String сoverUrl, String[] ownerIds) {
         this.title = title;
         this.authors = authors;
         this.description = description;
         this.publishedDate = publishedDate;
         this.averageRating = averageRating;
-        this.thumbnailUrl = thumbnailUrl;
+        this.сoverUrl = сoverUrl;
         this.ownerIds = ownerIds;
     }
 
@@ -97,11 +97,11 @@ public class Book {
         this.averageRating = averageRating;
     }
 
-    public String getThumbnailUrl() {
-        return thumbnailUrl;
+    public String getСoverUrl() {
+        return сoverUrl;
     }
 
-    public void setThumbnailUrl(String thumbnailUrl) {
-        this.thumbnailUrl = thumbnailUrl;
+    public void setСoverUrl(String thumbnailUrl) {
+        this.сoverUrl = thumbnailUrl;
     }
 }

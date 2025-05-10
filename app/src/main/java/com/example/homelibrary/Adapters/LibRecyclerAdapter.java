@@ -1,6 +1,7 @@
 package com.example.homelibrary.Adapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 import com.example.homelibrary.Data.Book;
 import com.example.homelibrary.R;
 
@@ -34,8 +37,14 @@ public class LibRecyclerAdapter extends RecyclerView.Adapter<LibRecyclerAdapter.
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
         Book book = Lib.get(position);
-        holder.nameTextView.setText(book.getName());
-        holder.coverImageView.setImageResource(book.getCover());
+        holder.nameTextView.setText(book.getTitle());
+        String uri = book.getСoverUrl();
+        if (uri != null) {
+            Glide.with(context).load(book.getСoverUrl()) // это URL обложки
+                    .into(holder.coverImageView);
+        } else {
+            holder.coverImageView.setImageResource(R.drawable.image_test);//Если вдруг картинка не загрузится
+        }
     }
 
     @Override

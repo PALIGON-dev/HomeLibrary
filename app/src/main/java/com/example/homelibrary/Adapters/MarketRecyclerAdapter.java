@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.homelibrary.Data.Book;
 import com.example.homelibrary.R;
 
@@ -35,8 +36,14 @@ public class MarketRecyclerAdapter extends RecyclerView.Adapter<MarketRecyclerAd
     @Override
     public void onBindViewHolder(@NonNull MarketRecyclerAdapter.MarketViewHolder holder, int position) {
         Book book = Books.get(position);
-        holder.Cover.setImageResource(book.getCover());
-        holder.Description.setText(book.getDescription());
+        String uri = book.getСoverUrl();
+        if (uri != null) {
+            Glide.with(context).load(book.getСoverUrl()) // это URL обложки
+                    .into(holder.Cover);
+        } else {
+            holder.Cover.setImageResource(R.drawable.image_test);//Если вдруг картинка не загрузится
+        }
+        holder.Description.setText(book.getDescription());//Установка описания
     }
 
     @Override
