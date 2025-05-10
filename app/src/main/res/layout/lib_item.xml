@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="8dp">
+
+    <ImageView
+        android:id="@+id/Cover"
+        android:layout_width="match_parent"
+        android:layout_height="219dp"
+        android:scaleType="centerCrop"
+        tools:srcCompat="@drawable/image_test" />
+
+    <TextView
+        android:id="@+id/Name"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:paddingTop="4dp"
+        android:text="Название книги"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

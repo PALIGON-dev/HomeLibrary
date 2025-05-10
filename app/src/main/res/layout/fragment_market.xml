@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="50dp"
+    tools:context=".Fragments.MarketFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/MarketList"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        tools:layout_editor_absoluteX="-1dp"
+        tools:layout_editor_absoluteY="575dp" />
+</LinearLayout>
