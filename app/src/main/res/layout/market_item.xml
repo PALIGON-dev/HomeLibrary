@@ -1,24 +1,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:layout_margin="8dp"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:background="@android:color/white">
 
     <ImageView
-        android:id="@+id/Cover"
-        android:layout_width="209dp"
-        android:layout_height="match_parent"
+        android:id="@+id/MarketCover"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
         android:scaleType="centerCrop"
-        tools:srcCompat="@drawable/image_test" />
+        android:src="@drawable/image_test" />
 
-    <TextView
-        android:id="@+id/Description"
-        android:layout_width="50dp"
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:paddingTop="4dp"
-        android:text="Описание книги"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingStart="8dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="206dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text="Название книги"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Добавить"
+            android:layout_marginTop="60dp"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
 
 </LinearLayout>

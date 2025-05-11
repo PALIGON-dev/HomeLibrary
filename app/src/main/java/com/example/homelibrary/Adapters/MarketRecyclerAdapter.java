@@ -1,28 +1,36 @@
 package com.example.homelibrary.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.homelibrary.Data.AppDatabase;
 import com.example.homelibrary.Data.Book;
 import com.example.homelibrary.R;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 
 public class MarketRecyclerAdapter extends RecyclerView.Adapter<MarketRecyclerAdapter.MarketViewHolder> {
 
-    List<Book> Books;
+    List<Book> Books = new ArrayList<>();
     Context context;
+    private AppDatabase database;
+    private ExecutorService executor;
 
-    public MarketRecyclerAdapter(Context context,List<Book> books) {
-        Books = books;
+    public MarketRecyclerAdapter(Context context,AppDatabase db) {
+        this.database = db;
         this.context = context;
     }
 
@@ -43,7 +51,12 @@ public class MarketRecyclerAdapter extends RecyclerView.Adapter<MarketRecyclerAd
         } else {
             holder.Cover.setImageResource(R.drawable.image_test);//Если вдруг картинка не загрузится
         }
-        holder.Description.setText(book.getDescription());//Установка описания
+        holder.Name.setText(book.getTitle());//Установка названия
+
+        holder.Add.setOnClickListener(v -> {//Обработка добавления книги в списко(БД)
+            database.bookDAO().addBook(book);
+            Toast.makeText(context, "Книга добавлена", Toast.LENGTH_SHORT).show();
+        });
     }
 
     @Override
@@ -51,14 +64,21 @@ public class MarketRecyclerAdapter extends RecyclerView.Adapter<MarketRecyclerAd
         return Books.size();
     }
 
+    public void setBooks(List<Book> books) {
+        this.Books = books;
+        notifyDataSetChanged();
+    }
+
     public class MarketViewHolder extends RecyclerView.ViewHolder {
 
-        TextView Description;
+        TextView Name;
+        Button Add;
         ImageView Cover;
         public MarketViewHolder(@NonNull View itemView) {
             super(itemView);
-            Cover = itemView.findViewById(R.id.Cover);
-            Description = itemView.findViewById(R.id.Description);
+            Cover = itemView.findViewById(R.id.MarketCover);
+            Name = itemView.findViewById(R.id.name);
+            Add = itemView.findViewById(R.id.btnAdd);
         }
     }
 }

@@ -1,7 +1,6 @@
 package com.example.homelibrary.Adapters;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +57,7 @@ public class LibRecyclerAdapter extends RecyclerView.Adapter<LibRecyclerAdapter.
 
         public BookViewHolder(@NonNull View itemView) {
             super(itemView);
-            coverImageView = itemView.findViewById(R.id.Cover);
+            coverImageView = itemView.findViewById(R.id.LibCover);
             nameTextView = itemView.findViewById(R.id.Name);
         }
     }

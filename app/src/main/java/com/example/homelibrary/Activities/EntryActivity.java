@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.room.Room;
 
 import com.example.homelibrary.Data.AppDatabase;
 import com.example.homelibrary.Data.User;
@@ -39,8 +40,9 @@ public class EntryActivity extends AppCompatActivity {
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
 
-        // Получаем экземпляр БД
-        appDatabase = AppDatabase.getInstance(getApplicationContext());
+        appDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "HomeLibraryDB")
+                .allowMainThreadQueries()
+                .build();
 
         btnLogin.setOnClickListener(v -> {
             String email = editTextEmail.getText().toString();

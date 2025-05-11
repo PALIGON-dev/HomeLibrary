@@ -18,26 +18,22 @@ public class Book {
     private String[] ownerIds; // список userId, у кого есть книга
 
     private String title;//Название
-    private String[] authors;//Авторы
+    private String authors;//Авторы
     private String description;//Описание
 
     @ColumnInfo(name = "published_date")
     private String publishedDate;//Дата публикации
 
-    private double averageRating;//Рейтинг
-
     @ColumnInfo(name = "cover_url")
     private String сoverUrl; // ссылка на изображение обложки
 
-    public Book(String title, String[] authors, String description, String publishedDate,
-                double averageRating, String сoverUrl, String[] ownerIds) {
+    public Book(String title, String authors, String description, String publishedDate, String сoverUrl) {
         this.title = title;
         this.authors = authors;
         this.description = description;
         this.publishedDate = publishedDate;
-        this.averageRating = averageRating;
         this.сoverUrl = сoverUrl;
-        this.ownerIds = ownerIds;
+        this.ownerIds = null;
     }
 
     // Геттеры и сеттеры
@@ -65,11 +61,11 @@ public class Book {
         this.title = title;
     }
 
-    public String[] getAuthors() {
+    public String getAuthors() {
         return authors;
     }
 
-    public void setAuthors(String[] authors) {
+    public void setAuthors(String authors) {
         this.authors = authors;
     }
 
@@ -89,13 +85,6 @@ public class Book {
         this.publishedDate = publishedDate;
     }
 
-    public double getAverageRating() {
-        return averageRating;
-    }
-
-    public void setAverageRating(double averageRating) {
-        this.averageRating = averageRating;
-    }
 
     public String getСoverUrl() {
         return сoverUrl;
