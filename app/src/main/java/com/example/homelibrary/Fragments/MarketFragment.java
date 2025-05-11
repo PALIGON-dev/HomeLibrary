@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -59,9 +60,11 @@ public class MarketFragment extends Fragment {
         SearchView = view.findViewById(R.id.SearchView);
         SearchView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-
-        MarketRecyclerAdapter adapter = new MarketRecyclerAdapter(requireContext(),db);
-        SearchView.setAdapter(adapter);
+        db = Room.databaseBuilder(getContext(), AppDatabase.class, "HomeLibraryDB")
+                .allowMainThreadQueries()
+                .build();//Создание экземпляра БД
+        MarketRecyclerAdapter adapter = new MarketRecyclerAdapter(requireContext(),db);//Создание адаптера
+        SearchView.setAdapter(adapter);//Установка адаптера
 
         buttonSearch.setOnClickListener(v -> {
             String query = editTextSearch.getText().toString();//Запрос из поисковой строки

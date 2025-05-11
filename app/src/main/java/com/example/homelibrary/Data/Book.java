@@ -13,9 +13,8 @@ public class Book {
     @ColumnInfo(name = "book_id")
     private int bookId;
 
-    @TypeConverters(Converters.class)
     @ColumnInfo(name = "owners_ids")
-    private String[] ownerIds; // список userId, у кого есть книга
+    private String ownerIds; //userId, у кого есть книга
 
     private String title;//Название
     private String authors;//Авторы
@@ -45,11 +44,11 @@ public class Book {
         this.bookId = bookId;
     }
 
-    public String[] getOwnerIds() {
+    public String getOwnerIds() {
         return ownerIds;
     }
 
-    public void setOwnerIds(String[] ownerIds) {
+    public void setOwnerIds(String ownerIds) {
         this.ownerIds = ownerIds;
     }
 
