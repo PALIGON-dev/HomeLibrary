@@ -25,10 +25,12 @@ import java.util.List;
 
 public class MarketRecyclerAdapter extends RecyclerView.Adapter<MarketRecyclerAdapter.MarketViewHolder> {
 
-    List<Book> Books = new ArrayList<>();
-    Context context;
+    private List<Book> Books = new ArrayList<>();
+    private Context context;
     private AppDatabase database;
     private SharedPreferences preferences;
+
+    private int bookCounter=0;
 
     public MarketRecyclerAdapter(Context context,AppDatabase db) {
         this.database = db;
@@ -60,8 +62,16 @@ public class MarketRecyclerAdapter extends RecyclerView.Adapter<MarketRecyclerAd
             User user = database.userDao().getUser(preferences.getInt("user_id",-1));
             book.setOwnerIds(user.getId());//Присваиваем книге владельца
             database.bookDAO().addBook(book);//Добавляем книгу
+            user.setActive(user.getActive()+1);//Обновляем счетчик активных книг у пользователя
+            database.userDao().updateUser(user);//Обновляем данные в БД
             Toast.makeText(context, "Книга добавлена", Toast.LENGTH_SHORT).show();
         });
+    }
+
+    @Override
+    public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
+
     }
 
     @Override

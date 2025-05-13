@@ -24,7 +24,7 @@ public interface BookDAO {
     @Query("SELECT * FROM Books WHERE book_id = :id")
     Book getBookById(int id);
     @Query("SELECT * FROM Books WHERE owners_ids = :userId")
-    List<Book> getBooksByOwner(String userId);
+    List<Book> getBooksByOwner(int userId);
     @Query("DELETE FROM Books")
     void deleteAll();
 }
