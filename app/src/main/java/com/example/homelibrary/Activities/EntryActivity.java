@@ -1,6 +1,8 @@
 package com.example.homelibrary.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +25,8 @@ public class EntryActivity extends AppCompatActivity {
     Button btnLogin, btnRegister;
     EditText editTextEmail, editTextPassword;
     AppDatabase appDatabase;
+
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +53,14 @@ public class EntryActivity extends AppCompatActivity {
             String password = editTextPassword.getText().toString();
             if (appDatabase.userDao().validate(email, password) != null) {
                 // Успешный вход, пользователь с такой почтой и паролем нашелся
-                startActivity(new Intent(this, MainActivity.class));
+                int UserId =appDatabase.userDao().getIdByEmail(email);//Получаем Id по email
+                preferences = getSharedPreferences("user_data", Context.MODE_PRIVATE);//Сохранение состояния пользователя
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean("logged_in", true);//Запоминание пользователя
+                editor.putInt("user_id",UserId);//Запоминание id пользователя
+                editor.apply();
+
+                startActivity(new Intent(this, MainActivity.class));//Запуск основной Activity
                 finish();
             } else {
                 Toast.makeText(this, "Неверный email или пароль", Toast.LENGTH_SHORT).show();

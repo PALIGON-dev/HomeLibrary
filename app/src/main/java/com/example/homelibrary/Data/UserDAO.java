@@ -16,6 +16,8 @@ public interface UserDAO {
     public void updateUser(User user);
     @Query("SELECT * FROM Users WHERE user_id==:user_id")
     public User getUser(int user_id);
+    @Query("SELECT user_id FROM Users WHERE Email = :Email")
+    int getIdByEmail(String Email);
     @Query("SELECT books_active FROM Users WHERE user_id==:user_id")
     public int getActive(int user_id);
     @Query("SELECT books_archive FROM Users WHERE user_id==:user_id")

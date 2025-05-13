@@ -37,9 +37,9 @@ public class LibRecyclerAdapter extends RecyclerView.Adapter<LibRecyclerAdapter.
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
         Book book = Lib.get(position);
         holder.nameTextView.setText(book.getTitle());
-        String uri = book.getСoverUrl();
+        String uri = book.getCoverUrl();
         if (uri != null) {
-            Glide.with(context).load(book.getСoverUrl()) // это URL обложки
+            Glide.with(context).load(book.getCoverUrl()) // это URL обложки
                     .into(holder.coverImageView);
         } else {
             holder.coverImageView.setImageResource(R.drawable.image_test);//Если вдруг картинка не загрузится

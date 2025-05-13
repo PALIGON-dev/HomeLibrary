@@ -60,6 +60,7 @@ public class MarketFragment extends Fragment {
         SearchView = view.findViewById(R.id.SearchView);
         SearchView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
+
         db = Room.databaseBuilder(getContext(), AppDatabase.class, "HomeLibraryDB")
                 .allowMainThreadQueries()
                 .build();//Создание экземпляра БД

@@ -1,7 +1,11 @@
 package com.example.homelibrary.Activities;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -10,7 +14,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
+import androidx.room.Room;
 
+import com.example.homelibrary.Data.AppDatabase;
+import com.example.homelibrary.Data.User;
 import com.example.homelibrary.R;
 import com.example.homelibrary.Fragments.LibFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -22,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
     private Fragment MarketFragment;
     private Fragment SettingsFragment;
 
+    SharedPreferences preferences;
+
+    AppDatabase appDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +43,20 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        appDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "HomeLibraryDB")
+                .allowMainThreadQueries()
+                .build();
+
+        preferences = getSharedPreferences("user_data", Context.MODE_PRIVATE);
+        boolean isLoggedIn = preferences.getBoolean("logged_in",false);//Входил ли пользователь
+        User user = appDatabase.userDao().getUser(preferences.getInt("user_id",-1));
+
+        if (!isLoggedIn | user == null) {
+            // Перейти на страницу авторизации если пользователь не авторизован
+            startActivity(new Intent(this, EntryActivity.class));
+        }
+
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         bottomNavigationView.setSelectedItemId(R.id.book); //Выделяет "Подборки" при старте

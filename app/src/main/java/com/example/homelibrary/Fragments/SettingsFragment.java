@@ -1,5 +1,8 @@
 package com.example.homelibrary.Fragments;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,19 +18,24 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.homelibrary.Activities.EntryActivity;
 import com.example.homelibrary.Data.AppDatabase;
+import com.example.homelibrary.Data.Book;
+import com.example.homelibrary.Data.User;
 import com.example.homelibrary.R;
 
 public class SettingsFragment extends Fragment {
 
-    TextView Name,Books,Level;
+    TextView Books,Level,Email;
     ImageView Image;
-    Button Ex,Reg;
+    Button Ex;
 
     AppDatabase appDatabase;
-    EditText EdName,EdPass;
+
+    SharedPreferences preferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,11 +46,11 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Name = view.findViewById(R.id.UserName);
         Books = view.findViewById(R.id.UserBooksCount);
         Level = view.findViewById(R.id.UserLevel);
         Image = view.findViewById(R.id.UserImage);
         Ex = view.findViewById(R.id.ExitButton);
+        Email = view.findViewById(R.id.UserEmail);
 
         RoomDatabase.Callback myCallBack = new RoomDatabase.Callback() {
             @Override
@@ -57,9 +65,34 @@ public class SettingsFragment extends Fragment {
         };
 
         appDatabase = Room.databaseBuilder(getActivity().getApplicationContext(), AppDatabase.class,"HomeLibraryDB")
-                .addCallback(myCallBack).build();
+                .addCallback(myCallBack).allowMainThreadQueries()
+                .build();
 
 
+        preferences = getActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE);
+        User user = appDatabase.userDao().getUser(preferences.getInt("user_id",-1));//Получение пользователя по id
+        int BooksRead = user.getActive()+user.getArchive();
+        Books.setText(String.valueOf(BooksRead));
+        Email.setText(user.getEmail());
+        if (BooksRead>=0 && BooksRead<=5){
+            Level.setText("Юный читатель");
+        }
+        else if (BooksRead>=6 && BooksRead <=10){
+            Level.setText("Книголюб");
+        }
+        else if (BooksRead>=11 && BooksRead <=15){
+            Level.setText("Книжный червь");
+        }
 
+        Ex.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.apply();
+                // Перенаправляем на экран входа
+                startActivity(new Intent(getActivity(), EntryActivity.class));
+            }
+        });
     }
 }

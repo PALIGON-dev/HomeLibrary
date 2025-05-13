@@ -3,7 +3,6 @@ package com.example.homelibrary.Data;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
 
 
 @Entity(tableName = "Books")
@@ -14,7 +13,7 @@ public class Book {
     private int bookId;
 
     @ColumnInfo(name = "owners_ids")
-    private String ownerIds; //userId, у кого есть книга
+    private int ownerIds; //userId, у кого есть книга
 
     private String title;//Название
     private String authors;//Авторы
@@ -24,15 +23,15 @@ public class Book {
     private String publishedDate;//Дата публикации
 
     @ColumnInfo(name = "cover_url")
-    private String сoverUrl; // ссылка на изображение обложки
+    private String coverUrl; // ссылка на изображение обложки
 
-    public Book(String title, String authors, String description, String publishedDate, String сoverUrl) {
+    public Book(String title, String authors, String description, String publishedDate, String coverUrl) {
         this.title = title;
         this.authors = authors;
         this.description = description;
         this.publishedDate = publishedDate;
-        this.сoverUrl = сoverUrl;
-        this.ownerIds = null;
+        this.coverUrl = coverUrl; //Исправлено на coverUrl
+        this.ownerIds = -1; //Изначально книги ни у кого нет
     }
 
     // Геттеры и сеттеры
@@ -44,11 +43,11 @@ public class Book {
         this.bookId = bookId;
     }
 
-    public String getOwnerIds() {
+    public int getOwnerIds() {
         return ownerIds;
     }
 
-    public void setOwnerIds(String ownerIds) {
+    public void setOwnerIds(int ownerIds) {
         this.ownerIds = ownerIds;
     }
 
@@ -85,11 +84,11 @@ public class Book {
     }
 
 
-    public String getСoverUrl() {
-        return сoverUrl;
+    public String getCoverUrl() {
+        return coverUrl;
     }
 
-    public void setСoverUrl(String thumbnailUrl) {
-        this.сoverUrl = thumbnailUrl;
+    public void setCoverUrl(String thumbnailUrl) {
+        this.coverUrl = thumbnailUrl;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.homelibrary.Adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,18 +17,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.homelibrary.Data.AppDatabase;
 import com.example.homelibrary.Data.Book;
+import com.example.homelibrary.Data.User;
 import com.example.homelibrary.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
 
 public class MarketRecyclerAdapter extends RecyclerView.Adapter<MarketRecyclerAdapter.MarketViewHolder> {
 
     List<Book> Books = new ArrayList<>();
     Context context;
     private AppDatabase database;
-    private ExecutorService executor;
+    private SharedPreferences preferences;
 
     public MarketRecyclerAdapter(Context context,AppDatabase db) {
         this.database = db;
@@ -44,17 +45,21 @@ public class MarketRecyclerAdapter extends RecyclerView.Adapter<MarketRecyclerAd
     @Override
     public void onBindViewHolder(@NonNull MarketRecyclerAdapter.MarketViewHolder holder, int position) {
         Book book = Books.get(position);
-        String uri = book.getСoverUrl();
+        String uri = book.getCoverUrl();
         if (uri != null) {
-            Glide.with(context).load(book.getСoverUrl()) // это URL обложки
+            Glide.with(context).load(book.getCoverUrl()) // это URL обложки
                     .into(holder.Cover);
         } else {
+            Log.i("Failure","Не загрузилась картинка");
             holder.Cover.setImageResource(R.drawable.image_test);//Если вдруг картинка не загрузится
         }
         holder.Name.setText(book.getTitle());//Установка названия
 
         holder.Add.setOnClickListener(v -> {//Обработка добавления книги в списко(БД)
-            database.bookDAO().addBook(book);
+            preferences = context.getSharedPreferences("user_data", Context.MODE_PRIVATE);//Получаем данные пользователя
+            User user = database.userDao().getUser(preferences.getInt("user_id",-1));
+            book.setOwnerIds(user.getId());//Присваиваем книге владельца
+            database.bookDAO().addBook(book);//Добавляем книгу
             Toast.makeText(context, "Книга добавлена", Toast.LENGTH_SHORT).show();
         });
     }
