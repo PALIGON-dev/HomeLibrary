@@ -72,16 +72,16 @@ public class SettingsFragment extends Fragment {
         preferences = getActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE);
         User user = appDatabase.userDao().getUser(preferences.getInt("user_id",-1));//Получение пользователя по id
         int BooksRead = user.getActive()+user.getArchive();
-        Books.setText(String.valueOf(BooksRead));
-        Email.setText(user.getEmail());
+        Books.setText("Кол-во книг:"+String.valueOf(BooksRead));
+        Email.setText("Почта:"+user.getEmail());
         if (BooksRead>=0 && BooksRead<=5){
-            Level.setText("Юный читатель");
+            Level.setText("Ваш уровень:Юный читатель");
         }
         else if (BooksRead>=6 && BooksRead <=10){
-            Level.setText("Книголюб");
+            Level.setText("Ваш уровень:Книголюб");
         }
         else if (BooksRead>=11 && BooksRead <=15){
-            Level.setText("Книжный червь");
+            Level.setText("Ваш уровень:Книжный червь");
         }
 
         Ex.setOnClickListener(new View.OnClickListener() {

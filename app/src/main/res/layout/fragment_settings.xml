@@ -4,70 +4,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="24dp"
     android:background="@color/background"
     tools:context=".Fragments.SettingsFragment">
 
     <ImageView
         android:id="@+id/UserImage"
-        android:layout_width="177dp"
-        android:layout_height="207dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="244dp"
+        android:layout_height="268dp"
+        android:layout_marginTop="152dp"
+        android:padding="4dp"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.395"
         tools:src="@tools:sample/avatars[5]" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="358dp"
-        android:layout_height="155dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.75">
+        app:layout_constraintTop_toBottomOf="@id/UserImage"
+        app:layout_constraintVertical_bias="0.38">
 
         <TextView
             android:id="@+id/UserEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="example@mail.com"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/UserBooksCount"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="TextView" />
+            android:layout_marginTop="12dp"
+            android:text="Книг в библиотеке: 25"
+            android:textAlignment="center"
+            android:textColor="@color/grey"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/UserLevel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="TextView" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="228dp"
-        android:layout_height="92dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.93">
-
-        <Button
-            android:id="@+id/ExitButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Выйти" />
-
+            android:layout_marginTop="8dp"
+            android:text="Уровень: Библиофил"
+            android:textAlignment="center"
+            android:textColor="@color/grey"
+            android:textSize="14sp" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/ExitButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:text="Выйти"
+        android:backgroundTint="@color/red"
+        android:textColor="@android:color/white"
+        android:layout_marginHorizontal="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

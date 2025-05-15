@@ -7,34 +7,47 @@
     android:background="@color/background"
     android:padding="16dp">
 
+    <!-- Поисковая строка с кнопкой -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="32dp">
 
         <EditText
             android:id="@+id/editTextSearch"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:maxLines="2"
+            android:layout_height="48dp"
             android:layout_weight="2"
-            android:hint="Введите название книги" />
+            android:background="@drawable/edittext_background"
+            android:hint="Введите название книги"
+            android:paddingHorizontal="16dp"
+            android:textSize="14sp"
+            android:inputType="text"
+            android:imeOptions="actionSearch" />
 
         <Button
             android:id="@+id/buttonSearch"
             android:layout_width="0dp"
+            android:layout_height="48dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:text="Найти" />
+            android:layout_marginStart="12dp"
+            android:text="Найти"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/brown"
+            android:textColor="@android:color/white"
+            android:drawablePadding="8dp" />
     </LinearLayout>
 
-
+    <!-- Результаты поиска -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/SearchView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginTop="12dp" />
+        android:layout_marginTop="16dp"
+        android:clipToPadding="false"
+        android:paddingBottom="8dp"
+        android:scrollbars="vertical" />
 </LinearLayout>
