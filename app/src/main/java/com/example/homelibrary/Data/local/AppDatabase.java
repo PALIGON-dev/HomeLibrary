@@ -1,14 +1,15 @@
-package com.example.homelibrary.Data;
+package com.example.homelibrary.Data.local;
 
-import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import androidx.room.TypeConverters;
-import androidx.room.migration.Migration;
-import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import android.content.Context;
+
+import com.example.homelibrary.Data.Models.Book;
+import com.example.homelibrary.Data.local.DAO.BookDAO;
+import com.example.homelibrary.Data.Models.User;
+import com.example.homelibrary.Data.local.DAO.UserDAO;
 
 @Database(entities = {Book.class, User.class}, version = 2)
 public abstract class AppDatabase extends RoomDatabase {

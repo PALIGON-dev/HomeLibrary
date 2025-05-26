@@ -8,18 +8,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.homelibrary.Adapters.LibRecyclerAdapter;
-import com.example.homelibrary.Data.AppDatabase;
-import com.example.homelibrary.Data.Book;
+import com.example.homelibrary.Data.local.AppDatabase;
+import com.example.homelibrary.Data.Models.Book;
 import com.example.homelibrary.R;
 
 import java.util.List;

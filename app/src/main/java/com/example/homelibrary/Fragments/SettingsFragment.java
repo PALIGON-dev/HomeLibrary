@@ -16,15 +16,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.homelibrary.Activities.EntryActivity;
-import com.example.homelibrary.Data.AppDatabase;
-import com.example.homelibrary.Data.Book;
-import com.example.homelibrary.Data.User;
+import com.example.homelibrary.Data.local.AppDatabase;
+import com.example.homelibrary.Data.Models.User;
 import com.example.homelibrary.R;
 
 public class SettingsFragment extends Fragment {
@@ -72,6 +69,7 @@ public class SettingsFragment extends Fragment {
         preferences = getActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE);
         User user = appDatabase.userDao().getUser(preferences.getInt("user_id",-1));//Получение пользователя по id
         int BooksRead = user.getActive()+user.getArchive();
+        Image.setImageResource(R.drawable.user);
         Books.setText("Кол-во книг:"+String.valueOf(BooksRead));
         Email.setText("Почта:"+user.getEmail());
         if (BooksRead>=0 && BooksRead<=5){

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -16,10 +15,9 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.room.Room;
 
-import com.example.homelibrary.Data.AppDatabase;
-import com.example.homelibrary.Data.User;
+import com.example.homelibrary.Data.local.AppDatabase;
+import com.example.homelibrary.Data.Models.User;
 import com.example.homelibrary.R;
-import com.example.homelibrary.Fragments.LibFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

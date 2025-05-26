@@ -19,7 +19,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars[5]" />
+        tools:src="@drawable/user" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:text="example@mail.com"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -50,7 +50,7 @@
             android:layout_marginTop="12dp"
             android:text="Книг в библиотеке: 25"
             android:textAlignment="center"
-            android:textColor="@color/grey"
+            android:textColor="@color/white"
             android:textSize="14sp" />
 
         <TextView
@@ -60,7 +60,7 @@
             android:layout_marginTop="8dp"
             android:text="Уровень: Библиофил"
             android:textAlignment="center"
-            android:textColor="@color/grey"
+            android:textColor="@color/white"
             android:textSize="14sp" />
     </LinearLayout>
 

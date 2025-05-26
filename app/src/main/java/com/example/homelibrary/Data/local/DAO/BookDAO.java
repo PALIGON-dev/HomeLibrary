@@ -1,4 +1,4 @@
-package com.example.homelibrary.Data;
+package com.example.homelibrary.Data.local.DAO;
 
 
 import androidx.room.Dao;
@@ -6,6 +6,8 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
+
+import com.example.homelibrary.Data.Models.Book;
 
 import java.util.List;
 

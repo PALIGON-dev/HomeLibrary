@@ -8,15 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.homelibrary.Data.AppDatabase;
-import com.example.homelibrary.Data.Book;
+import com.example.homelibrary.Data.local.AppDatabase;
+import com.example.homelibrary.Data.Models.Book;
 import com.example.homelibrary.R;
 
 import java.util.ArrayList;
