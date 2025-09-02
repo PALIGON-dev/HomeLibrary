@@ -1,0 +1,22 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/libLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+    tools:listitem="@layout/lib_item" >
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="383dp"
+        android:text="Библиотека"
+        android:textColor="@color/white"
+        android:textSize="50dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/LibList"
+        android:layout_width="match_parent"
+        android:layout_height="81dp" />
+</LinearLayout>

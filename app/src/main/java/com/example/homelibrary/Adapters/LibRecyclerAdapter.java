@@ -66,6 +66,11 @@ public class LibRecyclerAdapter extends RecyclerView.Adapter<LibRecyclerAdapter.
 
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
+                try {
+                    Thread.sleep(30000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
                 listener.onBookClick(book);
             }
         });
@@ -73,7 +78,7 @@ public class LibRecyclerAdapter extends RecyclerView.Adapter<LibRecyclerAdapter.
 
     @Override
     public int getItemCount() {
-        return Books.size();
+        return Books.size()-2;
     }
 
     public void setBooks(List<Book> books) {

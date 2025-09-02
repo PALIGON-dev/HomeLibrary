@@ -52,6 +52,7 @@ public class EntryActivity extends AppCompatActivity {
             String password = editTextPassword.getText().toString();
             if (appDatabase.userDao().validate(email, password) != null) {
                 // Успешный вход, пользователь с такой почтой и паролем нашелся
+                Toast.makeText(EntryActivity.this, "Аккаунт успешно зарегистрирован", Toast.LENGTH_SHORT).show();
                 int UserId =appDatabase.userDao().getIdByEmail(email);//Получаем Id по email
                 preferences = getSharedPreferences("user_data", Context.MODE_PRIVATE);//Сохранение состояния пользователя
                 SharedPreferences.Editor editor = preferences.edit();
@@ -67,11 +68,27 @@ public class EntryActivity extends AppCompatActivity {
         });
 
         btnRegister.setOnClickListener(v -> {
+
             String email = editTextEmail.getText().toString().trim();
             String password = editTextPassword.getText().toString().trim();
             User newUser = new User(email, password);
             appDatabase.userDao().addUser(newUser);
             Toast.makeText(EntryActivity.this, "Аккаунт успешно зарегистрирован", Toast.LENGTH_SHORT).show();
+
+            if (appDatabase.userDao().validate(email, password) != null) {
+                // Успешный вход, пользователь с такой почтой и паролем нашелся
+                int UserId =appDatabase.userDao().getIdByEmail(email);//Получаем Id по email
+                preferences = getSharedPreferences("user_data", Context.MODE_PRIVATE);//Сохранение состояния пользователя
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean("logged_in", true);//Запоминание пользователя
+                editor.putInt("user_id",UserId);//Запоминание id пользователя
+                editor.apply();
+
+                startActivity(new Intent(this, MainActivity.class));//Запуск основной Activity
+                finish();
+            } else {
+                Toast.makeText(this, "Неверный email или пароль", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 }

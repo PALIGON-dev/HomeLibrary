@@ -44,8 +44,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@color/brown"
-            android:text="Регистрация"
-            android:textColor="@color/white"/>
+            android:text="Регстрця"
+            android:textColor="@color/white" />
 
         <Space
             android:layout_width="16dp"

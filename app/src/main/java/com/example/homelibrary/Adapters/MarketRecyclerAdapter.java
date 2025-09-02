@@ -41,7 +41,11 @@ public class MarketRecyclerAdapter extends RecyclerView.Adapter<MarketRecyclerAd
     @Override
     public MarketRecyclerAdapter.MarketViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.market_item, parent, false);
-        return new MarketViewHolder(view);
+        try {
+            return new MarketViewHolder(view);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -56,7 +60,6 @@ public class MarketRecyclerAdapter extends RecyclerView.Adapter<MarketRecyclerAd
             holder.Cover.setImageResource(R.drawable.image_test);//Если вдруг картинка не загрузится
         }
         holder.Name.setText(book.getTitle());//Установка названия
-
         holder.Add.setOnClickListener(v -> {//Обработка добавления книги в списко(БД)
             preferences = context.getSharedPreferences("user_data", Context.MODE_PRIVATE);//Получаем данные пользователя
             User user = database.userDao().getUser(preferences.getInt("user_id",-1));
@@ -89,9 +92,10 @@ public class MarketRecyclerAdapter extends RecyclerView.Adapter<MarketRecyclerAd
         TextView Name;
         Button Add;
         ImageView Cover;
-        public MarketViewHolder(@NonNull View itemView) {
+        public MarketViewHolder(@NonNull View itemView) throws InterruptedException {
             super(itemView);
             Cover = itemView.findViewById(R.id.MarketCover);
+            Thread.sleep(1500);
             Name = itemView.findViewById(R.id.name);
             Add = itemView.findViewById(R.id.btnAdd);
         }

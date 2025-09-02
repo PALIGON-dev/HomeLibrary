@@ -3,7 +3,7 @@
     <item
         android:id="@+id/home"
         android:icon="@drawable/home"
-        android:title="Библиотека" />
+        android:title="Library" />
     <item
         android:id="@+id/book"
         android:icon="@drawable/book"
@@ -11,5 +11,5 @@
     <item
         android:id="@+id/settings"
         android:icon="@drawable/settings"
-        android:title="Настройки" />
+        android:title="Nastroiki" />
 </menu>
